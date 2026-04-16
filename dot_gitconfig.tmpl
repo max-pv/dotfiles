@@ -1,0 +1,14 @@
+[user]
+	name = {{ .name }}
+	email = {{ .email }}
+[init]
+	defaultBranch = main
+{{- range .ssh_git_hosts }}
+[url "git@{{ . }}:"]
+	insteadOf = https://{{ . }}/
+{{- end }}
+{{- if .work_git_host }}
+[credential "https://{{ .work_git_host }}"]
+	helper =
+	helper = !/usr/bin/glab auth git-credential
+{{- end }}

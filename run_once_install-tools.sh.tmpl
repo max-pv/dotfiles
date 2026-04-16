@@ -1,0 +1,38 @@
+#!/bin/bash
+# Bootstrap script - runs once on chezmoi apply
+
+set -e
+
+echo "Installing tools..."
+
+# Detect OS
+case "$(uname -s)" in
+    Darwin*) OS="mac" ;;
+    Linux*)  OS="linux" ;;
+    *) OS="unknown" ;;
+esac
+
+# Install mise (replaces nvm, pyenv, etc.)
+if ! command -v mise &> /dev/null; then
+    echo "Installing mise..."
+    curl https://mise.run | sh
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
+# Install starship prompt
+if ! command -v starship &> /dev/null; then
+    echo "Installing starship..."
+    curl -sS https://starship.rs/install.sh | sh -s -- -y
+fi
+
+# Install chezmoi (in case bootstrapping from scratch)
+if ! command -v chezmoi &> /dev/null; then
+    echo "Installing chezmoi..."
+    curl -sfL https://git.io/chezmoi | sh -s -- -b ~/.local/bin
+fi
+
+# Install tools via mise
+echo "Installing language runtimes via mise..."
+mise install
+
+echo "Done!"

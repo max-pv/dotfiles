@@ -1,0 +1,4 @@
+[data]
+    name = {{ promptString "Git name" }}
+    email = {{ promptString "Git email" }}
+    work_git_host = {{ promptStringOnce . "work_git_host" "Work git host (leave empty if none)" }}
