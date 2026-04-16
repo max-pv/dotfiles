@@ -1,4 +1,5 @@
 [data]
-    name = {{ promptString "Git name" }}
-    email = {{ promptString "Git email" }}
-    work_git_host = {{ promptStringOnce . "work_git_host" "Work git host (leave empty if none)" }}
+    name = {{ promptString "Git name" | quote }}
+    email = {{ promptString "Git email" | quote }}
+    ssh_git_hosts = {{ promptString "SSH git hosts (comma-separated, e.g. git.example.com)" | splitList "," | toJson }}
+    goprivate = {{ promptString "GOPRIVATE (leave empty if none)" | quote }}

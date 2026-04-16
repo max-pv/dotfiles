@@ -8,10 +8,10 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:$HOME/go/bin"
 
-{{- if .work_git_host }}
+{{- if .goprivate }}
 
-# Work config
-export GOPRIVATE="{{ .work_git_host }}/*"
+# Go private modules
+export GOPRIVATE="{{ .goprivate }}"
 {{- end }}
 
 # Load secrets if exists

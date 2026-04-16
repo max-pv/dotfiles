@@ -12,6 +12,28 @@ case "$(uname -s)" in
     *) OS="unknown" ;;
 esac
 
+# Install zsh if not present
+if ! command -v zsh &> /dev/null; then
+    echo "Installing zsh..."
+    if [ "$OS" = "mac" ]; then
+        brew install zsh
+    elif [ "$OS" = "linux" ]; then
+        if command -v apt &> /dev/null; then
+            sudo apt update && sudo apt install -y zsh
+        elif command -v dnf &> /dev/null; then
+            sudo dnf install -y zsh
+        elif command -v pacman &> /dev/null; then
+            sudo pacman -S --noconfirm zsh
+        fi
+    fi
+fi
+
+# Install oh-my-zsh
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    echo "Installing oh-my-zsh..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
+
 # Install mise (replaces nvm, pyenv, etc.)
 if ! command -v mise &> /dev/null; then
     echo "Installing mise..."
