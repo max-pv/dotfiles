@@ -107,13 +107,12 @@ config.keys = {
     { key = "LeftArrow", mods = "ALT|SHIFT", action = wezterm.action.SplitPane({ direction = "Left" }) },
     { key = "RightArrow", mods = "ALT|SHIFT", action = wezterm.action.SplitPane({ direction = "Right" }) },
     { key = "UpArrow", mods = "ALT|SHIFT", action = wezterm.action.SplitPane({ direction = "Up" }) },
-    { key = "DownArrow", mods = "ALT|SHIFT", action = wezterm.action.SplitPane({ direction = "Down" }) },
+    { key = "DownArrow", mods = "ALT|SHIFT", action = wezterm.action.SplitPane({ direction = "Down" }) },`
 
-    -- Navigate panes with Alt+Arrow
-    { key = "LeftArrow", mods = "ALT", action = wezterm.action.ActivatePaneDirection("Left") },
-    { key = "RightArrow", mods = "ALT", action = wezterm.action.ActivatePaneDirection("Right") },
-    { key = "UpArrow", mods = "ALT", action = wezterm.action.ActivatePaneDirection("Up") },
-    { key = "DownArrow", mods = "ALT", action = wezterm.action.ActivatePaneDirection("Down") },
+    -- Shell-style word navigation/deletion
+    { key = "LeftArrow", mods = "ALT", action = wezterm.action.SendKey({ key = "b", mods = "ALT" }) },
+    { key = "RightArrow", mods = "ALT", action = wezterm.action.SendKey({ key = "f", mods = "ALT" }) },
+    { key = "Backspace", mods = "ALT", action = wezterm.action.SendKey({ key = "w", mods = "CTRL" }) },
 
     -- Close pane (Alt+Shift+W)
     { key = "W", mods = "ALT|SHIFT", action = wezterm.action.CloseCurrentPane({ confirm = true }) },
